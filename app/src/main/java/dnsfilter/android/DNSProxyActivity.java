@@ -1498,9 +1498,6 @@ public class DNSProxyActivity extends Activity
 		}
 	}
 
-
-	}
-
 	private void updateFooterLinks() {
 		String html = "<font color='#00BCD4'><strong>PRIVACY</strong></font> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <font color='#00BCD4'><strong>TERMS</strong></font>";
 		Spannable spannable = (Spannable) fromHtml(html);
