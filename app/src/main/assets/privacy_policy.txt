@@ -1,0 +1,28 @@
+CoreDNS+ Privacy Policy
+
+Last Updated: March 24, 2026
+
+CoreDNS+ is committed to protecting your privacy. This policy explains how we treat your information.
+
+1. Zero Data Collection Policy
+We do not collect, store, or transmit any personal identifiable information (PII). We do not monitor or log the websites you visit. All DNS filtering happens locally on your device.
+
+2. Local Processing
+CoreDNS+ creates a local VPN tunnel to intercept DNS queries. These queries are compared against your local blocklists. None of this data is ever sent to our servers.
+
+3. Permissions
+- VPN Service: Necessary for local DNS interception.
+- Network Access: Required to resolve allowed queries.
+- Storage Access: Used only for importing custom lists.
+- Notifications: Used to show service status.
+
+4. No Third-Party Analytics
+CoreDNS+ contains no tracking SDKs or ads. We do not share data with third parties.
+
+5. DNS Providers
+Your allowed queries are resolved by your chosen provider (e.g., Google, Cloudflare). Check their respective privacy policies.
+
+6. Security
+Your data stays on your device. This is the highest level of security possible for a DNS filter.
+
+Contact: https://github.com/mehmetym/CoreDNSPlus

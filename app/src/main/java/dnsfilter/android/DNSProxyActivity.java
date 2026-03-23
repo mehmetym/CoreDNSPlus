@@ -1052,6 +1052,51 @@ public class DNSProxyActivity extends Activity
 			showInitialInfoPopUp = false; //some issue => do not try again for future starts of app
 		}
 	}
+
+	private void showPrivacyDialog() {
+		try {
+			StringBuilder sb = new StringBuilder();
+			InputStream is = getAssets().open("privacy_policy.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			String str;
+			while ((str = br.readLine()) != null) {
+				sb.append(str).append("\n");
+			}
+			br.close();
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+			TextView title = new TextView(this);
+			title.setText("Privacy Policy");
+			title.setPadding(40, 40, 40, 40);
+			title.setTextSize(22);
+			title.setTextColor(Color.WHITE);
+			title.setTypeface(null, Typeface.BOLD);
+			builder.setCustomTitle(title);
+
+			ScrollView scrollView = new ScrollView(this);
+			TextView message = new TextView(this);
+			message.setText(sb.toString());
+			message.setPadding(40, 20, 40, 40);
+			message.setTextColor(Color.LTGRAY);
+			message.setTextSize(16);
+			scrollView.addView(message);
+			builder.setView(scrollView);
+
+			builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.CYAN);
+			dialog.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+		} catch (Exception e) {
+			Logger.getLogger().logException(e);
+		}
+	}
 	protected void loadAndApplyConfig(final boolean startApp) {
 
 		config = getConfig();
@@ -1067,10 +1112,16 @@ public class DNSProxyActivity extends Activity
 				public void run() {
 
 					//Link field
-					link_field_txt = "<font color='#ffffff'><strong><a href='https://github.com/mehmetym/CoreDNSPlus/corednsplus-privacy/'>PRIVACY</a></strong></font>";
+					link_field_txt = "<font color='#00BCD4'><strong>PRIVACY</strong></font>";
 					if (!MSG_ACTIVE) {
 						link_field.setText(fromHtml(link_field_txt));
-						link_field.setMovementMethod(LinkMovementMethod.getInstance());
+						link_field.setMovementMethod(null);
+						link_field.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								showPrivacyDialog();
+							}
+						});
 					}
 
 					//Log formatting
