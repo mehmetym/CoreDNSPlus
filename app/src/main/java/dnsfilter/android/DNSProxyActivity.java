@@ -1119,6 +1119,7 @@ public class DNSProxyActivity extends Activity
 
 					//Link field
 					link_field_txt = "<font color='#00BCD4'><strong>PRIVACY</strong></font>";
+					link_field.setText(fromHtml(link_field_txt));
 					link_field.setMovementMethod(null);
 					link_field.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -1126,9 +1127,6 @@ public class DNSProxyActivity extends Activity
 							showPrivacyDialog();
 						}
 					});
-					if (!MSG_ACTIVE) {
-						link_field.setText(fromHtml(link_field_txt));
-					}
 
 					//Log formatting
 					filterLogFormat = config.getConfigValue("filterLogFormat", "<font color='#E53935'>($CONTENT)</font>");
