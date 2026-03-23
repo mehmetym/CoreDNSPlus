@@ -536,7 +536,13 @@ public class DNSProxyActivity extends Activity
 			removeFilterBtn.setOnClickListener(this);
 			link_field = (TextView) findViewById(R.id.link_field);
 			link_field.setText(fromHtml(link_field_txt));
-			link_field.setMovementMethod(LinkMovementMethod.getInstance());
+			link_field.setMovementMethod(null);
+			link_field.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showPrivacyDialog();
+				}
+			});
 			
 			Drawable background = link_field.getBackground();
 			if (background instanceof ColorDrawable)
@@ -1113,15 +1119,15 @@ public class DNSProxyActivity extends Activity
 
 					//Link field
 					link_field_txt = "<font color='#00BCD4'><strong>PRIVACY</strong></font>";
+					link_field.setMovementMethod(null);
+					link_field.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							showPrivacyDialog();
+						}
+					});
 					if (!MSG_ACTIVE) {
 						link_field.setText(fromHtml(link_field_txt));
-						link_field.setMovementMethod(null);
-						link_field.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								showPrivacyDialog();
-							}
-						});
 					}
 
 					//Log formatting
