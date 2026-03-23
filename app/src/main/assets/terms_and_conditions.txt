@@ -1,0 +1,26 @@
+TERMS OF SERVICE - CoreDNS+
+Last Updated: March 24, 2026
+
+1. AGREEMENT TO TERMS
+By using CoreDNS+, you agree to be bound by these Terms. If you do not agree, do not use the app.
+
+2. LICENSE
+CoreDNS+ is open-source software licensed under GPLv2. You may use and share it according to the license terms.
+
+3. LOCAL PROCESSING
+CoreDNS+ operates LOCALLY on your device. It does not send your DNS traffic to external servers. You are responsible for the DNS servers you choose to use.
+
+4. PROHIBITED USES
+You may not use this app for illegal activities or to intentionally disrupt network services.
+
+5. NO WARRANTY (AS-IS)
+THE APP IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES. THE DEVELOPERS ARE NOT RESPONSIBLE FOR ANY DATA LOSS, NETWORK DISRUPTION, OR DEVICE ISSUES.
+
+6. LIMITATION OF LIABILITY
+In no event shall the developers be liable for any damages arising out of the use or inability to use the app.
+
+7. PRIVACY
+We respect your privacy. CoreDNS+ does not collect, store, or share your personal data or browsing history.
+
+8. CONTACT
+For support or feedback, visit: github.com/mehmetym/CoreDNSPlus

@@ -536,14 +536,10 @@ public class DNSProxyActivity extends Activity
 			removeFilterBtn = (TextView) findViewById(R.id.removeFilterBtn);
 			removeFilterBtn.setOnClickListener(this);
 			link_field = (TextView) findViewById(R.id.link_field);
-			link_field.setText(fromHtml(link_field_txt));
-			link_field.setMovementMethod(null);
-			link_field.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showPrivacyDialog();
-				}
-			});
+			link_field.setMovementMethod(LinkMovementMethod.getInstance());
+			updateFooterLinks();
+			
+			checkLegalConsent();
 			
 			Drawable background = link_field.getBackground();
 			if (background instanceof ColorDrawable)
@@ -1104,6 +1100,122 @@ public class DNSProxyActivity extends Activity
 			Logger.getLogger().logException(e);
 		}
 	}
+
+	private void showTermsDialog() {
+		try {
+			StringBuilder sb = new StringBuilder();
+			InputStream is = getAssets().open("terms_and_conditions.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			String str;
+			while ((str = br.readLine()) != null) {
+				sb.append(str).append("\n");
+			}
+			br.close();
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+			TextView title = new TextView(this);
+			title.setText("Terms of Service");
+			title.setPadding(40, 40, 40, 40);
+			title.setTextSize(22);
+			title.setTextColor(Color.WHITE);
+			title.setTypeface(null, Typeface.BOLD);
+			builder.setCustomTitle(title);
+
+			ScrollView scrollView = new ScrollView(this);
+			TextView message = new TextView(this);
+			message.setText(sb.toString());
+			message.setPadding(40, 20, 40, 40);
+			message.setTextColor(Color.LTGRAY);
+			message.setTextSize(16);
+			scrollView.addView(message);
+			builder.setView(scrollView);
+
+			builder.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.CYAN);
+			dialog.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+		} catch (Exception e) {
+			Logger.getLogger().logException(e);
+		}
+	}
+
+	private void checkLegalConsent() {
+		android.content.SharedPreferences prefs = getSharedPreferences("dnsfilter_prefs", android.content.Context.MODE_PRIVATE);
+		if (!prefs.getBoolean("legal_consent_accepted", false)) {
+			showInitialConsentDialog();
+		}
+	}
+
+	private void showInitialConsentDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
+		builder.setCancelable(false);
+		
+		TextView title = new TextView(this);
+		title.setText("Welcome to CoreDNS+");
+		title.setPadding(40, 40, 40, 10);
+		title.setTextSize(24);
+		title.setTextColor(Color.WHITE);
+		title.setTypeface(null, Typeface.BOLD);
+		builder.setCustomTitle(title);
+
+		LinearLayout layout = new LinearLayout(this);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		layout.setPadding(40, 20, 40, 20);
+
+		TextView msg = new TextView(this);
+		msg.setText("To protect your privacy and ensure transparency, please review and agree to our legal terms before using the application.");
+		msg.setTextColor(Color.LTGRAY);
+		msg.setTextSize(16);
+		layout.addView(msg);
+
+		TextView links = new TextView(this);
+		String linksTxt = "<br>Read our <font color='#00BCD4'><strong>Privacy Policy</strong></font> and <font color='#00BCD4'><strong>Terms of Service</strong></font> for details.";
+		links.setText(fromHtml(linksTxt));
+		links.setPadding(0, 30, 0, 30);
+		links.setTextSize(16);
+		links.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Show both one after another or just give links? 
+				// For simplicity, we'll let them click individual links if we used ClickableSpan, 
+				// but here we'll just show Privacy then Terms if they ask.
+				showPrivacyDialog();
+			}
+		});
+		layout.addView(links);
+		
+		builder.setView(layout);
+
+		builder.setPositiveButton("I AGREE", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				getSharedPreferences("dnsfilter_prefs", android.content.Context.MODE_PRIVATE)
+					.edit().putBoolean("legal_consent_accepted", true).apply();
+				dialog.dismiss();
+			}
+		});
+
+		builder.setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+				System.exit(0);
+			}
+		});
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
+		dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.CYAN);
+		dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
+		dialog.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+	}
 	protected void loadAndApplyConfig(final boolean startApp) {
 
 		config = getConfig();
@@ -1119,15 +1231,7 @@ public class DNSProxyActivity extends Activity
 				public void run() {
 
 					//Link field
-					link_field_txt = "<font color='#00BCD4'><strong>PRIVACY (APP)</strong></font>";
-					link_field.setText(fromHtml(link_field_txt));
-					link_field.setMovementMethod(null);
-					link_field.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							showPrivacyDialog();
-						}
-					});
+					updateFooterLinks();
 
 					//Log formatting
 					filterLogFormat = config.getConfigValue("filterLogFormat", "<font color='#E53935'>($CONTENT)</font>");
@@ -1394,6 +1498,50 @@ public class DNSProxyActivity extends Activity
 		}
 	}
 
+
+	}
+
+	private void updateFooterLinks() {
+		String html = "<font color='#00BCD4'><strong>PRIVACY</strong></font> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <font color='#00BCD4'><strong>TERMS</strong></font>";
+		Spannable spannable = (Spannable) fromHtml(html);
+		
+		android.text.style.ClickableSpan privacySpan = new android.text.style.ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				showPrivacyDialog();
+			}
+			@Override
+			public void updateDrawState(android.text.TextPaint ds) {
+				ds.setUnderlineText(false);
+			}
+		};
+		
+		android.text.style.ClickableSpan termsSpan = new android.text.style.ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				showTermsDialog();
+			}
+			@Override
+			public void updateDrawState(android.text.TextPaint ds) {
+				ds.setUnderlineText(false);
+			}
+		};
+		
+		String plainText = spannable.toString();
+		int privacyStart = plainText.indexOf("PRIVACY");
+		int termsStart = plainText.indexOf("TERMS");
+		
+		if (privacyStart >= 0) {
+			spannable.setSpan(privacySpan, privacyStart, privacyStart + 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		if (termsStart >= 0) {
+			spannable.setSpan(termsSpan, termsStart, termsStart + 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		
+		link_field.setText(spannable);
+		link_field.setMovementMethod(LinkMovementMethod.getInstance());
+		link_field.setHighlightColor(Color.TRANSPARENT);
+	}
 
 	private void onRemoteConnected(ConfigurationAccess remote){
 		CONFIG =remote;
