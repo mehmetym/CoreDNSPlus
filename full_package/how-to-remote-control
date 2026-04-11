@@ -6,6 +6,3 @@
   ==> client_remote_ctrl_host = <the IP Address or host on which the remote runs>
 - Restart remote and client instance
 - From the Android UI use the "remote control" icon to connect
-
-
-  
