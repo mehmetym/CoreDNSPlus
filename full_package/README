@@ -7,7 +7,7 @@ This is a DNS Filter Proxy writtem in Java.
 It can be used for filtering ads and other unwished hosts based on Host Name filtering.
 
 Please see dnsfilter.conf for settings and their documentation.
- 
+
 
 *********ANDROID-VERSION**********
 
