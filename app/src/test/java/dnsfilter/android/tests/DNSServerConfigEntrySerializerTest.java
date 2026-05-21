@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import dnsfilter.android.dnsserverconfig.widget.DNSServerConfigEntrySerializer;
 import dnsfilter.android.dnsserverconfig.widget.DNSType;
 import dnsfilter.android.dnsserverconfig.widget.listitem.DNSServerConfigEntry;
