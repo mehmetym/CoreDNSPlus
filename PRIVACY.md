@@ -1,4 +1,4 @@
-# Privacy Policy for CoreDNS+
+# Privacy Policy for CoreDNS+ 
 
 **Last Updated: March 24, 2026**
 
