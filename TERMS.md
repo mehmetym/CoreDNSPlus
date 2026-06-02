@@ -4,7 +4,6 @@
 **Last Updated: March 24, 2026**
 
 
-
 Please read these Terms of Service ("Terms") carefully before using the CoreDNS+ mobile application ("the App"). By accessing or using the App, you agree to be bound by these Terms. If you do not agree to any part of these Terms, you may not use the App.
 
 ## 1. Description of Service
