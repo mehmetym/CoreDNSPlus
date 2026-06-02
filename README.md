@@ -5,7 +5,6 @@ Welcome to **CoreDNS+**, a powerful, modern, and open-source DNS filtering appli
 ## Features
 
 
-
 - **Advanced DNS Filtering**: Block unwanted domains, ads, and trackers at the DNS level before they even reach your device.
 - **Battery & Performance Optimized**: Designed to run seamlessly in the background with minimal battery footprint and zero bloated background processes.
 - **Customizable Host Lists**: Easily import and manage your own custom blocklists.
