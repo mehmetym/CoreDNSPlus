@@ -2,6 +2,7 @@
 
 **Last Updated: March 24, 2026**
 
+
 CoreDNS+ ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we treat your information when you use the CoreDNS+ mobile application.
 
 ### 1. Zero Data Collection Policy
