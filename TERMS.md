@@ -1,4 +1,4 @@
-  # Terms of Service - CoreDNS+
+   # Terms of Service - CoreDNS+
 
 
 **Last Updated: March 24, 2026**
