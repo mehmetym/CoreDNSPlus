@@ -12,7 +12,7 @@ Welcome to **CoreDNS+**, a powerful, modern, and open-source DNS filtering appli
 - **Open Source**: Fully transparent and driven by the community. You can review every line of code.
 
 ## Getting Started
-
+ 
 ### Prerequisites
 - Android Studio (latest recommended)
 - Android SDK API 34+
