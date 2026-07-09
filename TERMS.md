@@ -12,7 +12,7 @@ CoreDNS+ is an open-source DNS filtering and privacy tool that provides local DN
 ## 2. License Grant
 CoreDNS+ is licensed under the **GNU General Public License v2.0 (GPLv2)**. You are permitted to use, modify, and distribute the App in accordance with the terms of this license.
 
-## 3. Acceptable Use
+## 3. Acceptable Use 
 You agree not to use the App for any purpose that is:
 - Illegal, prohibited by law, or in violation of local/international regulations.
 - Intended to interfere with or disrupt the integrity or performance of any network or service.
