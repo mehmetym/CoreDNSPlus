@@ -8,7 +8,7 @@ CoreDNS+ ("we", "our", or "us") is committed to protecting your privacy. This Pr
 ### 1. Zero Data Collection Policy
 CoreDNS+ is built with a "Privacy by Design" philosophy. 
 - **No Personal Data:** We do not collect, store, or transmit any personal identifiable information (PII) such as your name, email address, phone number, or location.
-- **No Browsing History:** We do not monitor, log, or track the websites you visit or the applications you use. All DNS filtering logic happens locally on your device.
+- **No Browsing History:** We  do not monitor, log, or track the websites you visit or the applications you use. All DNS filtering logic happens locally on your device.
 - **No Account Required:** You do not need to create an account to use the application.
 
 ### 2. Local Processing
