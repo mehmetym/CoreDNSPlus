@@ -11,7 +11,7 @@ CoreDNS+ is built with a "Privacy by Design" philosophy.
 - **No Browsing History:** We  do not monitor, log, or track the websites you visit or the applications you use. All DNS filtering logic happens locally on your device.
 - **No Account Required:** You do not need to create an account to use the application.
 
-### 2. Local Processing 
+### 2. Local Processing   
 CoreDNS+ operates as a local DNS proxy. When you enable the service:
 - It creates a local VPN tunnel on your device to intercept DNS queries.
 - These queries are compared against your locally stored blocklists.
